@@ -1,87 +1,40 @@
-# CI de nivel 01 - Configura disparo manual a partir de um clique
+# CI de nível 01 - Configura disparo manual a partir de um clique
 
-# nome do 'pipeline'
+# Nome do 'pipeline'
 name: 'Execução Manual'
 
 # Regras de disparo (gatilhos) ou triggers
-# gatilho de execução manual = workflow_dispatch
-
 on:
   workflow_dispatch:
 
-# trabalhos/tarefas dentro do 'pipeline' = jobs
-
+# Trabalhos/tarefas dentro do 'pipeline'
 jobs:
   e2e-tests:
-   
-   # maquina que o job vai executar
-   runs-on: ubuntu-latest
+    # Máquina onde o job será executado
+    runs-on: ubuntu-latest
 
-   # passos do script de build
-   steps:
-     # clone do projeto
-     - uses: actions/checkout@v4
+    # Passos do script de build
+    steps:
+      # Clone do projeto
+      - uses: actions/checkout@v4
 
-     # instalação do node
-     - uses: actions/setup-node@v4
-       with:
+      # Instalação do Node.js
+      - uses: actions/setup-node@v4
+        with:
           node-version: 22.x
-     # instalação yarn
-     - name: Instalando yarn
-       run: npm install -g yarn 
 
-     # instalação dependências
-     - name: Instalando Dependências
-       run: yarn 
+      # Instalação do Yarn
+      - name: Instalando yarn
+        run: npm install -g yarn
 
-    # instalação playwright 
-     - name: Instalando playwright
-       run: yarn playwright install
+      # Instalação das dependências
+      - name: Instalando Dependências
+        run: yarn
 
-    # Executar os testes e2e
-     - name: Executando testes E2E
-       run: yarn run e2e
+      # Instalação do Playwright
+      - name: Instalando Playwright
+        run: yarn playwright install
 
-# CI de nivel 01 - Configura disparo manual a partir de um clique
-
-# nome do 'pipeline'
-name: 'Execução Manual'
-
-# Regras de disparo (gatilhos) ou triggers
-# gatilho de execução manual = workflow_dispatch
-
-on:
-  workflow_dispatch:
-
-# trabalhos/tarefas dentro do 'pipeline' = jobs
-
-jobs:
-  e2e-tests:
-   
-   # maquina que o job vai executar
-   runs-on: ubuntu-latest
-
-   # passos do script de build
-   steps:
-     # clone do projeto
-     - uses: actions/checkout@v4
-
-     # instalação do node
-     - uses: actions/setup-node@v4
-       with:
-          node-version: 22.x
-     # instalação yarn
-     - name: Instalando yarn
-       run: npm install -g yarn 
-
-     # instalação dependências
-     - name: Instalando Dependências
-       run: yarn 
-
-    # instalação playwright 
-     - name: Instalando playwright
-       run: yarn playwright install
-
-    # Executar os testes e2e
-     - name: Executando testes E2E
-       run: yarn run e2e
+      # Execução dos testes E2E
+      - name: Executando testes E2E
+        run: yarn run e2e
