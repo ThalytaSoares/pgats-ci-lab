@@ -8,37 +8,37 @@ name: 'Execução Agendada'
 
 on:
   schedule:
-   - cron: '0 6 * * 1'
+    - cron: '0 6 * * 1'  # todo segunda-feira às 06:00
 
 # trabalhos/tarefas dentro do 'pipeline' = jobs
 
 jobs:
   e2e-tests:
-   
-   # maquina que o job vai executar
-   runs-on: ubuntu-latest
+    # maquina que o job vai executar
+    runs-on: ubuntu-latest
 
-   # passos do script de build
-   steps:
-     # clone do projeto
-     - uses: actions/checkout@v4
+    # passos do script de build
+    steps:
+      # clone do projeto
+      - uses: actions/checkout@v4
 
-     # instalação do node
-     - uses: actions/setup-node@v4
-       with:
+      # instalação do node
+      - uses: actions/setup-node@v4
+        with:
           node-version: 22.x
-     # instalação yarn
-     - name: Instalando yarn
-       run: npm install -g yarn 
 
-     # instalação dependências
-     - name: Instalando Dependências
-       run: yarn 
+      # instalação yarn
+      - name: Instalando yarn
+        run: npm install -g yarn 
 
-    # instalação playwright 
-     - name: Instalando playwright
-       run: yarn playwright install
+      # instalação dependências
+      - name: Instalando Dependências
+        run: yarn 
 
-    # Executar os testes e2e
-     - name: Executando testes E2E
-       run: yarn run e2e
+      # instalação playwright 
+      - name: Instalando playwright
+        run: yarn playwright install
+
+      # Executar os testes e2e
+      - name: Executando testes E2E
+        run: yarn run e2e
